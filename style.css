@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+#stadium-image {
+  width: 50%;
+  height: auto;
+}
+
+#stadium-name {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+#submit-button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#hints {
+  margin-top: 10px;
+  font-size: 12px;
+}
