@@ -36,20 +36,29 @@ function randomizeStadium() {
 window.onload = function() {
   randomizeStadium();
 
-  document.getElementById("submit-button").addEventListener("click", function() {
-    var stadiumName = document.getElementById("stadium-name").value;
+  var stadiumName = document.getElementById("stadium-name").value;
 
-    if (stadiums.indexOf(stadiumName) === -1) {
-      alert("That is not a real stadium!");
-      return;
-    }
+  if (stadiums.indexOf(stadiumName) === -1) {
+    alert("That is not a real stadium!");
+    return;
+  }
 
-    if (stadiumName === stadiums[currentStadiumIndex]) {
-      alert("Correct!");
-      randomizeStadium();
-    } else {
-      alert("Incorrect!");
-      document.getElementById("hints").innerHTML += stadiums[currentStadiumIndex].hints;
+  var hints = [];
+  var correctAnswer = stadiumName;
+
+  while (hints.length < 6) {
+    var hint = stadium.hints.shift();
+    hints.push(hint);
+    document.getElementById("hints").innerHTML += hint + "<br>";
+
+    if (stadiumName === document.getElementById("stadium-name").value) {
+      break;
     }
-  });
+  }
+
+  if (stadiumName === document.getElementById("stadium-name").value) {
+    alert("Correct!");
+  } else {
+    alert("Incorrect!");
+  }
 };
