@@ -26,4 +26,30 @@ var stadiums = [
   },
 ];
 
-var currentStadiumIndex = 0
+function randomizeStadium() {
+  var currentStadiumIndex = Math.floor(Math.random() * stadiums.length);
+  var stadium = stadiums[currentStadiumIndex];
+  document.getElementById("stadium-image").src = stadium.image;
+  document.getElementById("hints").innerHTML = stadium.hints;
+}
+
+window.onload = function() {
+  randomizeStadium();
+
+  document.getElementById("submit-button").addEventListener("click", function() {
+    var stadiumName = document.getElementById("stadium-name").value;
+
+    if (stadiums.indexOf(stadiumName) === -1) {
+      alert("That is not a real stadium!");
+      return;
+    }
+
+    if (stadiumName === stadiums[currentStadiumIndex]) {
+      alert("Correct!");
+      randomizeStadium();
+    } else {
+      alert("Incorrect!");
+      document.getElementById("hints").innerHTML += stadiums[currentStadiumIndex].hints;
+    }
+  });
+};
