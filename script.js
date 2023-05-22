@@ -26,4 +26,4 @@ var stadiums = [
   },
 ];
 
-var currentStadiumIndex = Math.floor(Math.random() *
+var currentStadiumIndex = 0
