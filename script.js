@@ -1,64 +1,37 @@
-var stadiums = [
-  {
-    name: "Wembley Stadium",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/London_Wembley.jpg/1280px-London_Wembley.jpg",
-    hints: ["W", "e", "m", "b", "l"],
-  },
-  {
-    name: "Old Trafford",
-    image: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Old_Trafford_-_geograph.org.uk_-_3893530.jpg",
-    hints: ["O", "l", "d", "T", "r"],
-  },
-  {
-    name: "The Emirates Stadium",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/London_Emirates_Stadium_arsenal.jpg/345px-London_Emirates_Stadium_arsenal.jpg",
-    hints: ["E", "m", "i", "r", "a"],
-  },
-  {
-    name: "Anfield",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Panorama_of_Anfield_with_new_main_stand_%2829676137824%29.jpg/1280px-Panorama_of_Anfield_with_new_main_stand_%2829676137824%29.jpg",
-    hints: ["A", "n", "f", "i", "e"],
-  },
-  {
-    name: "Tottenham Hotspur Stadium",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/London_Tottenham_Hotspur_Stadium.jpg/345px-London_Tottenham_Hotspur_Stadium.jpg",
-    hints: ["T", "o", "t", "t", "e"],
-  },
+const hints = [
+    "Primeira dica: Esta é a dica 1.",
+    "Segunda dica: Esta é a dica 2.",
+    "Terceira dica: Esta é a dica 3.",
+    "Quarta dica: Esta é a dica 4."
 ];
 
-function randomizeStadium() {
-  var currentStadiumIndex = Math.floor(Math.random() * stadiums.length);
-  var stadium = stadiums[currentStadiumIndex];
-  document.getElementById("stadium-image").src = stadium.image;
-  document.getElementById("hints").innerHTML = stadium.hints;
-}
+const correctAnswer = "Resposta Correta";
+let attemptsLeft = 5;
 
-window.onload = function() {
-  randomizeStadium();
-
-  var stadiumName = document.getElementById("stadium-name").value;
-
-  if (stadiums.indexOf(stadiumName) === -1) {
-    alert("That is not a real stadium!");
-    return;
-  }
-
-  var hints = [];
-  var correctAnswer = stadiumName;
-
-  while (hints.length < 6) {
-    var hint = stadium.hints.shift();
-    hints.push(hint);
-    document.getElementById("hints").innerHTML += hint + "<br>";
-
-    if (stadiumName === document.getElementById("stadium-name").value) {
-      break;
+document.getElementById("submit-button").addEventListener("click", () => {
+    const userGuess = document.getElementById("guess-input").value;
+    const feedback = document.getElementById("feedback");
+    const attempts = document.getElementById("attempts-left");
+    
+    if (userGuess.toLowerCase() === correctAnswer.toLowerCase()) {
+        feedback.textContent = "Parabéns! Você acertou!";
+        feedback.style.color = "green";
+        document.getElementById("guess-input").disabled = true;
+        document.getElementById("submit-button").disabled = true;
+        return;
     }
-  }
 
-  if (stadiumName === document.getElementById("stadium-name").value) {
-    alert("Correct!");
-  } else {
-    alert("Incorrect!");
-  }
-};
+    attemptsLeft--;
+    attempts.textContent = `Tentativas restantes: ${attemptsLeft}`;
+
+    if (attemptsLeft > 0) {
+        feedback.textContent = "Errado! Tente novamente.";
+        feedback.style.color = "red";
+        document.getElementById(`hint${5 - attemptsLeft}`).style.display = "block";
+    } else {
+        feedback.textContent = "Game Over! Você não acertou.";
+        feedback.style.color = "red";
+        document.getElementById("guess-input").disabled = true;
+        document.getElementById("submit-button").disabled = true;
+    }
+});
