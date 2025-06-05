@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<title>Football Stadium Game</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação de Imagens</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>Football Stadium Game</h1>
-<div id="stadium-image"></div>
-<input type="text" id="stadium-name" placeholder="Enter the name of the stadium">
-<button id="submit-button">Submit</button>
-<div id="hints"></div>
-<script src="script.js"></script>
+    <h1>Jogo de Adivinhação de Imagens</h1>
+    <div class="game-container">
+        <img id="game-image" src="imagem.jpg" alt="Imagem do Jogo">
+        <div id="hints">
+            <p class="hint" id="hint1">Dica 1</p>
+            <p class="hint" id="hint2">Dica 2</p>
+            <p class="hint" id="hint3">Dica 3</p>
+            <p class="hint" id="hint4">Dica 4</p>
+        </div>
+        <input type="text" id="guess-input" placeholder="Digite sua resposta...">
+        <button id="submit-button">Enviar</button>
+        <p id="feedback"></p>
+        <p id="attempts-left">Tentativas restantes: 5</p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
